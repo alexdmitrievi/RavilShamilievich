@@ -12,23 +12,20 @@
         }
 
         :root {
-            --primary: #3d5a80;
-            --secondary: #98c1d9;
-            --accent: #c8b8a8;
-            --success: #a8b5a0;
-            --gold: #d4a574;
-            --light: #f7f5f2;
-            --dark: #2a3d4f;
-            --premium: #8b7e74;
-            --soft-blue: #b8d4e8;
-            --warm-beige: #e8dfd5;
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --gold: #f39c12;
+            --light: #ecf0f1;
+            --dark: #1a252f;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--primary);
-            background: linear-gradient(135deg, #d4a574 0%, #a8b5a0 50%, #98c1d9 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow-x: hidden;
         }
 
@@ -157,7 +154,7 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(61, 90, 128, 0.95);
+            background: rgba(44, 62, 80, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 0;
             z-index: 1000;
@@ -252,7 +249,7 @@
             background: white;
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
@@ -265,7 +262,7 @@
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(139, 126, 116, 0.18);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .card-icon {
@@ -332,7 +329,7 @@
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             width: calc(50% - 40px);
             margin-left: auto;
         }
@@ -427,7 +424,7 @@
             overflow-x: auto;
             margin: 2rem 0;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         table {
@@ -465,7 +462,7 @@
 
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, #98c1d9, #a8b5a0);
+            background: linear-gradient(135deg, var(--secondary), var(--success));
             color: white;
             text-align: center;
             padding: 5rem 0;
@@ -478,8 +475,8 @@
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #f7f5f2, #e8dfd5);
-            color: var(--primary);
+            background: white;
+            color: var(--secondary);
             padding: 1rem 3rem;
             border-radius: 50px;
             text-decoration: none;
@@ -487,13 +484,12 @@
             font-size: 1.1rem;
             margin-top: 2rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            background: linear-gradient(135deg, #ffffff, #f0ebe3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
         /* Checklist */
@@ -501,7 +497,7 @@
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin: 2rem 0;
         }
 
@@ -536,7 +532,7 @@
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin: 2rem 0;
         }
 
@@ -591,18 +587,18 @@
         }
 
         .risk-high {
-            background: #f5e6e6;
-            color: #c8847e;
+            background: #ffe5e5;
+            color: var(--accent);
         }
 
         .risk-medium {
-            background: #fef3e8;
-            color: #d4a574;
+            background: #fff3e0;
+            color: #f57c00;
         }
 
         .risk-low {
-            background: #e8f0e6;
-            color: #a8b5a0;
+            background: #e8f5e9;
+            color: var(--success);
         }
 
         /* Mobile Menu */
@@ -723,9 +719,9 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#summary">Резюме</a></li>
                 <li><a href="#analysis">Анализ</a></li>
-                <li><a href="#channels">Каналы</a></li>
+                <li><a href="#channels">Каналы сбыта</a></li>
                 <li><a href="#strategy">Стратегия</a></li>
-                <li><a href="#plan">План</a></li>
+                <li><a href="#plan">План действий</a></li>
                 <li><a href="#finance">Финансы</a></li>
                 <li><a href="#risks">Риски</a></li>
             </ul>
@@ -760,7 +756,7 @@
     <section id="summary">
         <div class="container">
             <div class="section-header">
-                <h2>📊 Краткое резюме</h2>
+                <h2>📊 Executive Summary</h2>
                 <p style="max-width: 800px; margin: 1rem auto; color: #666;">Равиль Шамильевич — лучший мастер люксовой мебели с 30-летним опытом. Текущий оборот 2-3 млн ₽ при потенциале топ-1% говорит о критической недозагрузке.</p>
             </div>
 
@@ -790,7 +786,7 @@
     <section id="analysis">
         <div class="container">
             <div class="section-header">
-                <h2>🔍 Анализ ситуации</h2>
+                <h2>🔍 SWOT-анализ</h2>
             </div>
 
             <div class="cards">
@@ -855,7 +851,7 @@
 
                 <div class="card">
                     <div class="card-rating">6/10</div>
-                    <h3>Интернет-продажи Премиум</h3>
+                    <h3>E-commerce Премиум</h3>
                     <p><strong>Инвестиции:</strong> 180 000 ₽</p>
                     <p><strong>Прогноз:</strong> 4-5 млн ₽ за год</p>
                     <p style="margin-top: 1rem; color: #666;">Сайт-портфолио + таргет на состоятельную аудиторию. Важен как витрина, но не основной для люкса.</p>
@@ -863,7 +859,7 @@
 
                 <div class="card">
                     <div class="card-rating">5/10</div>
-                    <h3>Офлайн Премиум</h3>
+                    <h3>Офлайн Premium</h3>
                     <p><strong>Инвестиции:</strong> 450 000 ₽</p>
                     <p><strong>Прогноз:</strong> 3-5 млн ₽ за год</p>
                     <p style="margin-top: 1rem; color: #666;">Шоурум + выставки. Слишком дорого на старте, лучше 1-2 выставки в год для нетворкинга.</p>
@@ -880,12 +876,12 @@
             </div>
 
             <div class="chart-container">
-                <h3 style="margin-bottom: 2rem; color: var(--primary);">Гибридная модель: Партнёрства 70% + Интернет-продажи 30%</h3>
+                <h3 style="margin-bottom: 2rem; color: var(--primary);">Гибридная модель: B2B 70% + E-commerce 30%</h3>
                 
                 <div class="progress-container">
                     <div class="progress-item" style="--progress-width: 70%;">
                         <div class="progress-header">
-                            <span>Партнёрства с дизайнерами (основной канал)</span>
+                            <span>B2B-партнёрства (основной канал)</span>
                             <span>70%</span>
                         </div>
                         <div class="progress-bar">
@@ -895,7 +891,7 @@
 
                     <div class="progress-item" style="--progress-width: 30%;">
                         <div class="progress-header">
-                            <span>Интернет-продажи (дополнительный)</span>
+                            <span>E-commerce (дополнительный)</span>
                             <span>30%</span>
                         </div>
                         <div class="progress-bar">
@@ -905,7 +901,7 @@
                 </div>
 
                 <div style="background: var(--light); padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
-                    <p><strong>Почему именно так:</strong> Партнёрства с дизайнерами дают стабильный поток через проектировщиков (конверсия 70-80%), сайт — репутацию и прямых клиентов без комиссий. Вложения 380к укладываются в бюджет 500к.</p>
+                    <p><strong>Почему именно так:</strong> B2B даёт стабильный поток через дизайнеров (конверсия 70-80%), сайт — репутацию и прямых клиентов без комиссий. Вложения 380к укладываются в бюджет 500к.</p>
                 </div>
             </div>
         </div>
@@ -988,7 +984,7 @@
                         <li>✓ Подписать 5-7 партнёров</li>
                         <li>✓ Получить 3-4 заказа</li>
                     </ul>
-                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 700-900 тыс. ₽ выручка</p>
+                    <p style="margin-top: 1rem;"><strong>KPI:</strong> 700-900 тыс. ₽ выручка</p>
                 </div>
 
                 <div class="card">
@@ -1001,7 +997,7 @@
                         <li>✓ Регистрация на выставку</li>
                         <li>✓ Получить 10-15 заказов</li>
                     </ul>
-                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 2,5-3,5 млн ₽ выручка</p>
+                    <p style="margin-top: 1rem;"><strong>KPI:</strong> 2,5-3,5 млн ₽ выручка</p>
                 </div>
 
                 <div class="card">
@@ -1014,7 +1010,7 @@
                         <li>✓ Запуск реферальной программы</li>
                         <li>✓ Получить 20-25 заказов</li>
                     </ul>
-                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 5-6 млн ₽ выручка</p>
+                    <p style="margin-top: 1rem;"><strong>KPI:</strong> 5-6 млн ₽ выручка</p>
                 </div>
 
                 <div class="card">
@@ -1027,7 +1023,7 @@
                         <li>✓ Запустить VIP-коллекцию</li>
                         <li>✓ Получить 15-20 заказов</li>
                     </ul>
-                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 4-5 млн ₽ выручка</p>
+                    <p style="margin-top: 1rem;"><strong>KPI:</strong> 4-5 млн ₽ выручка</p>
                 </div>
             </div>
         </div>
@@ -1058,7 +1054,7 @@
                             <td>Холодные звонки, встречи с партнёрами, CRM</td>
                         </tr>
                         <tr>
-                            <td><strong>Специалист по соцсетям</strong></td>
+                            <td><strong>SMM-специалист</strong></td>
                             <td>4</td>
                             <td>30-40к ₽</td>
                             <td>Таргет, контент, обработка заявок</td>
@@ -1305,7 +1301,7 @@
                 <div class="checklist-item">
                     <div class="checklist-icon">✅</div>
                     <div>
-                        <strong>День 7: Лендинг на конструкторе</strong>
+                        <strong>День 7: Лендинг на Tilda</strong>
                         <p style="color: #666; margin-top: 0.3rem;">Портфолио 10 работ + форма заказа. Можно отправлять партнёрам.</p>
                     </div>
                 </div>
@@ -1347,7 +1343,7 @@
                 <div class="checklist-item">
                     <div class="checklist-icon">✅</div>
                     <div>
-                        <strong>День 10: Система учёта клиентов</strong>
+                        <strong>День 10: amoCRM</strong>
                         <p style="color: #666; margin-top: 0.3rem;">Регистрация, тестовый период 14 дней, внесение первых партнёров.</p>
                     </div>
                 </div>
@@ -1360,7 +1356,7 @@
         <div class="container">
             <h2>🚀 Первое действие</h2>
             <p style="font-size: 1.2rem; margin: 2rem 0; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Завтра Равиль звонит веб-разработчику (или нанимает фрилансера за 10-15 тыс. ₽) и заказывает лендинг с портфолио 10 лучших работ. Параллельно составляет список 50 дизайн-студий в таблице.
+                Завтра Равиль звонит веб-разработчику на Tilda (или нанимает фрилансера на Kwork за 10-15 тыс. ₽) и заказывает лендинг с портфолио 10 лучших работ. Параллельно составляет список 50 дизайн-студий в Excel.
             </p>
             <p style="font-size: 1.1rem; opacity: 0.9;">
                 <strong>Эти два действия запустят трансформацию бизнеса.</strong>
