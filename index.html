@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бизнес-план: От мастерской к мануфактуре</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3d5a80;
+            --secondary: #98c1d9;
+            --accent: #c8b8a8;
+            --success: #a8b5a0;
+            --gold: #d4a574;
+            --light: #f7f5f2;
+            --dark: #2a3d4f;
+            --premium: #8b7e74;
+            --soft-blue: #b8d4e8;
+            --warm-beige: #e8dfd5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background: linear-gradient(135deg, #d4a574 0%, #a8b5a0 50%, #98c1d9 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,100 Q300,200 600,100 T1200,100 L1200,600 L0,600 Z" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat bottom;
+            background-size: cover;
+            animation: wave 10s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(-25px) translateY(-10px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero .stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            min-width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-card .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(61, 90, 128, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav.visible {
+            transform: translateY(0);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            background: white;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section-header.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(139, 126, 116, 0.18);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card-rating {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--secondary), var(--success));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            width: calc(50% - 40px);
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px var(--light);
+        }
+
+        .timeline-content h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .timeline-content .year {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-item {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .progress-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 30px;
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--success));
+            border-radius: 15px;
+            transition: width 1.5s ease;
+            width: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .progress-item.visible .progress-fill {
+            width: var(--progress-width);
+        }
+
+        /* Table */
+        .responsive-table {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: var(--primary);
+            color: white;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light);
+        }
+
+        tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--light);
+        }
+
+        .highlight {
+            background: var(--success);
+            color: white;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #98c1d9, #a8b5a0);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f7f5f2, #e8dfd5);
+            color: var(--primary);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #ffffff, #f0ebe3);
+        }
+
+        /* Checklist */
+        .checklist {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light);
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item:hover {
+            background: var(--light);
+            padding-left: 1rem;
+            margin-left: -1rem;
+            margin-right: -1rem;
+            padding-right: 1rem;
+        }
+
+        .checklist-icon {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+
+        /* Charts */
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139, 126, 116, 0.12);
+            margin: 2rem 0;
+        }
+
+        .bar-chart {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            height: 300px;
+            padding: 1rem 0;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--secondary), var(--success));
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            transition: all 0.6s ease;
+            height: 0;
+            opacity: 0;
+        }
+
+        .bar.visible {
+            height: var(--bar-height);
+            opacity: 1;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Risk Badge */
+        .risk-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .risk-high {
+            background: #f5e6e6;
+            color: #c8847e;
+        }
+
+        .risk-medium {
+            background: #fef3e8;
+            color: #d4a574;
+        }
+
+        .risk-low {
+            background: #e8f0e6;
+            color: #a8b5a0;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                min-width: 100%;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--primary);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <div style="color: white; font-weight: 600; font-size: 1.2rem;">📊 Бизнес-план</div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#summary">Резюме</a></li>
+                <li><a href="#analysis">Анализ</a></li>
+                <li><a href="#channels">Каналы</a></li>
+                <li><a href="#strategy">Стратегия</a></li>
+                <li><a href="#plan">План</a></li>
+                <li><a href="#finance">Финансы</a></li>
+                <li><a href="#risks">Риски</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>От мастерской к мануфактуре</h1>
+            <p class="subtitle">Путь к 500 000 ₽ чистой прибыли в месяц за 3 года</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="number">30+</span>
+                    <span class="label">лет опыта</span>
+                </div>
+                <div class="stat-card">
+                    <span class="number">×7</span>
+                    <span class="label">рост выручки</span>
+                </div>
+                <div class="stat-card">
+                    <span class="number">36 млн ₽</span>
+                    <span class="label">выручка год 3</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </div>
+
+    <!-- Executive Summary -->
+    <section id="summary">
+        <div class="container">
+            <div class="section-header">
+                <h2>📊 Краткое резюме</h2>
+                <p style="max-width: 800px; margin: 1rem auto; color: #666;">Равиль Шамильевич — лучший мастер люксовой мебели с 30-летним опытом. Текущий оборот 2-3 млн ₽ при потенциале топ-1% говорит о критической недозагрузке.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Главная проблема</h3>
+                    <p>Бизнес в ловушке: качество топ-1%, но нет системы продаж, маркетинга и делегирования. "Мастер делает всё сам" = стагнация.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💡</div>
+                    <h3>Решение</h3>
+                    <p>Модель "авторская мануфактура": Равиль — создатель коллекций и гарант качества, производство масштабируется через подмастерьев.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Результат</h3>
+                    <p>Рост с 15 изделий/год до 60-80, выручка с 2,5 млн до 36 млн ₽, чистая прибыль 6+ млн/год (500к+/мес).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SWOT Analysis -->
+    <section id="analysis">
+        <div class="container">
+            <div class="section-header">
+                <h2>🔍 Анализ ситуации</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card" style="border-top: 4px solid var(--success);">
+                    <h3>💪 Сильные стороны</h3>
+                    <ul style="line-height: 2;">
+                        <li>✓ 30 лет опыта, лучший в люксе</li>
+                        <li>✓ Личное участие в каждом изделии</li>
+                        <li>✓ Готовность инвестировать 500к ₽</li>
+                        <li>✓ Умение обучать (ученики успешны)</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--accent);">
+                    <h3>⚠️ Слабые стороны</h3>
+                    <ul style="line-height: 2;">
+                        <li>× Нулевой маркетинг (только сарафан)</li>
+                        <li>× Не делегирует задачи</li>
+                        <li>× Нет онлайн-присутствия</li>
+                        <li>× Локальный охват</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--secondary);">
+                    <h3>🎁 Возможности</h3>
+                    <ul style="line-height: 2;">
+                        <li>→ Рост рынка премиум +8-12%/год</li>
+                        <li>→ Тренд на авторскую мебель</li>
+                        <li>→ Дефицит качественных мастеров</li>
+                        <li>→ Казахстан — растущий рынок</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--gold);">
+                    <h3>⚡ Угрозы</h3>
+                    <ul style="line-height: 2;">
+                        <li>! Ученики захватили долю рынка</li>
+                        <li>! Возраст 63 — нужна система</li>
+                        <li>! Без изменений → деградация</li>
+                        <li>! Экономические риски</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Channels Analysis -->
+    <section id="channels">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎯 Анализ каналов сбыта</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-rating">9/10</div>
+                    <h3>B2B Партнёрства</h3>
+                    <p><strong>Инвестиции:</strong> 200 000 ₽</p>
+                    <p><strong>Прогноз:</strong> 8-12 млн ₽ за год</p>
+                    <p style="margin-top: 1rem; color: #666;">Работа с дизайн-студиями и архитекторами. Идеальный канал для люкса — тёплые лиды, высокая конверсия 70-80%.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-rating">6/10</div>
+                    <h3>Интернет-продажи Премиум</h3>
+                    <p><strong>Инвестиции:</strong> 180 000 ₽</p>
+                    <p><strong>Прогноз:</strong> 4-5 млн ₽ за год</p>
+                    <p style="margin-top: 1rem; color: #666;">Сайт-портфолио + таргет на состоятельную аудиторию. Важен как витрина, но не основной для люкса.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-rating">5/10</div>
+                    <h3>Офлайн Премиум</h3>
+                    <p><strong>Инвестиции:</strong> 450 000 ₽</p>
+                    <p><strong>Прогноз:</strong> 3-5 млн ₽ за год</p>
+                    <p style="margin-top: 1rem; color: #666;">Шоурум + выставки. Слишком дорого на старте, лучше 1-2 выставки в год для нетворкинга.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="strategy">
+        <div class="container">
+            <div class="section-header">
+                <h2>✅ Рекомендуемая стратегия</h2>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 2rem; color: var(--primary);">Гибридная модель: Партнёрства 70% + Интернет-продажи 30%</h3>
+                
+                <div class="progress-container">
+                    <div class="progress-item" style="--progress-width: 70%;">
+                        <div class="progress-header">
+                            <span>Партнёрства с дизайнерами (основной канал)</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill">8-12 млн ₽</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-item" style="--progress-width: 30%;">
+                        <div class="progress-header">
+                            <span>Интернет-продажи (дополнительный)</span>
+                            <span>30%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill">4-5 млн ₽</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--light); padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+                    <p><strong>Почему именно так:</strong> Партнёрства с дизайнерами дают стабильный поток через проектировщиков (конверсия 70-80%), сайт — репутацию и прямых клиентов без комиссий. Вложения 380к укладываются в бюджет 500к.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3-Year Plan -->
+    <section id="plan">
+        <div class="container">
+            <div class="section-header">
+                <h2>📅 План на 3 года</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="year">Год 1: Фундамент</span>
+                        <h3>Трансформация</h3>
+                        <ul style="line-height: 2;">
+                            <li>🎯 Выручка: 13 млн ₽</li>
+                            <li>👥 Команда: 7 человек</li>
+                            <li>🤝 Партнёров: 30 студий</li>
+                            <li>📦 Заказов: 48-64 шт/год</li>
+                            <li>💰 Прибыль: 1,5-2 млн ₽</li>
+                        </ul>
+                        <p style="margin-top: 1rem; color: #666;"><strong>Ключевое:</strong> Сайт, первые партнёры, найм менеджера + подмастерьев, участие в выставке.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="year">Год 2: Масштабирование</span>
+                        <h3>Рост</h3>
+                        <ul style="line-height: 2;">
+                            <li>🎯 Выручка: 24 млн ₽</li>
+                            <li>👥 Команда: 12 человек</li>
+                            <li>🤝 Партнёров: 45-50 студий</li>
+                            <li>🌍 География: 15+ городов</li>
+                            <li>💰 Прибыль: 3-4 млн ₽</li>
+                        </ul>
+                        <p style="margin-top: 1rem; color: #666;"><strong>Ключевое:</strong> Расширение на новые города, B2B с застройщиками, найм управляющего производством.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="year">Год 3: Цель достигнута</span>
+                        <h3>Стабильность</h3>
+                        <ul style="line-height: 2;">
+                            <li>🎯 Выручка: 36 млн ₽</li>
+                            <li>👥 Команда: 15 человек</li>
+                            <li>🤝 Партнёров: 60-70 студий</li>
+                            <li>📦 Производство: 60-80 изделий/год</li>
+                            <li>💰 <span class="highlight">Прибыль: 6+ млн ₽ (500к/мес) ✅</span></li>
+                        </ul>
+                        <p style="margin-top: 1rem; color: #666;"><strong>Ключевое:</strong> Автономная команда, Равиль — главный мастер + VIP-заказы, премиализация бренда.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- First Year Quarterly Plan -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>📌 Год 1: Поквартальный план</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Q1: Фундамент</h3>
+                    <p style="color: var(--secondary); font-weight: 600; margin: 1rem 0;">Бюджет: 370 000 ₽</p>
+                    <ul style="line-height: 2; font-size: 0.9rem;">
+                        <li>✓ Создать сайт-портфолио</li>
+                        <li>✓ База 50 дизайн-студий</li>
+                        <li>✓ Нанять менеджера по продажам</li>
+                        <li>✓ Подписать 5-7 партнёров</li>
+                        <li>✓ Получить 3-4 заказа</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 700-900 тыс. ₽ выручка</p>
+                </div>
+
+                <div class="card">
+                    <h3>Q2: Тестирование</h3>
+                    <p style="color: var(--secondary); font-weight: 600; margin: 1rem 0;">Бюджет: 505 000 ₽</p>
+                    <ul style="line-height: 2; font-size: 0.9rem;">
+                        <li>✓ Масштабировать до 20-25 партнёров</li>
+                        <li>✓ Запустить таргет (25к/мес)</li>
+                        <li>✓ Нанять подмастерья + SMM</li>
+                        <li>✓ Регистрация на выставку</li>
+                        <li>✓ Получить 10-15 заказов</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 2,5-3,5 млн ₽ выручка</p>
+                </div>
+
+                <div class="card">
+                    <h3>Q3: Масштабирование</h3>
+                    <p style="color: var(--secondary); font-weight: 600; margin: 1rem 0;">Бюджет: 785 000 ₽</p>
+                    <ul style="line-height: 2; font-size: 0.9rem;">
+                        <li>✓ Довести до 30 партнёров</li>
+                        <li>✓ Участие в выставке</li>
+                        <li>✓ Нанять 2-го подмастерья</li>
+                        <li>✓ Запуск реферальной программы</li>
+                        <li>✓ Получить 20-25 заказов</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 5-6 млн ₽ выручка</p>
+                </div>
+
+                <div class="card">
+                    <h3>Q4: Оптимизация</h3>
+                    <p style="color: var(--secondary); font-weight: 600; margin: 1rem 0;">Бюджет: 905 000 ₽</p>
+                    <ul style="line-height: 2; font-size: 0.9rem;">
+                        <li>✓ Стабилизировать производство</li>
+                        <li>✓ Нанять логиста</li>
+                        <li>✓ Внедрить 1С</li>
+                        <li>✓ Запустить VIP-коллекцию</li>
+                        <li>✓ Получить 15-20 заказов</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Показатели:</strong> 4-5 млн ₽ выручка</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team & Delegation -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>👥 Ключевые роли для найма</h2>
+            </div>
+
+            <div class="responsive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Роль</th>
+                            <th>Месяц найма</th>
+                            <th>Зарплата</th>
+                            <th>Ключевая задача</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Менеджер по продажам</strong></td>
+                            <td>2</td>
+                            <td>50-100к ₽</td>
+                            <td>Холодные звонки, встречи с партнёрами, CRM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Специалист по соцсетям</strong></td>
+                            <td>4</td>
+                            <td>30-40к ₽</td>
+                            <td>Таргет, контент, обработка заявок</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Подмастерье №1</strong></td>
+                            <td>5</td>
+                            <td>60к ₽</td>
+                            <td>Обивка, сборка каркасов под контролем</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Подмастерье №2</strong></td>
+                            <td>8</td>
+                            <td>60к ₽</td>
+                            <td>Увеличение производственных мощностей</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Логист</strong></td>
+                            <td>10</td>
+                            <td>50к ₽</td>
+                            <td>Планирование, закупки, контроль сроков</td>
+                        </tr>
+                        <tr style="background: var(--light);">
+                            <td><strong>Управляющий производством</strong></td>
+                            <td>19 (год 2)</td>
+                            <td>80-100к ₽</td>
+                            <td>Полное управление вместо Равиля</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="chart-container" style="margin-top: 3rem;">
+                <h3 style="margin-bottom: 2rem;">Путь трансформации Равиля</h3>
+                <div class="progress-container">
+                    <div class="progress-item" style="--progress-width: 80%;">
+                        <div class="progress-header">
+                            <span>Месяц 1-3: Мастер-предприниматель</span>
+                            <span>80% работы сам</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item" style="--progress-width: 60%;">
+                        <div class="progress-header">
+                            <span>Месяц 4-6: Мастер-контролёр</span>
+                            <span>60% работы сам</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item" style="--progress-width: 40%;">
+                        <div class="progress-header">
+                            <span>Месяц 7-12: Главный мастер</span>
+                            <span>40% работы сам</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item" style="--progress-width: 20%;">
+                        <div class="progress-header">
+                            <span>Год 2-3: Мастер-бренд</span>
+                            <span>20% работы сам</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Model -->
+    <section id="finance">
+        <div class="container">
+            <div class="section-header">
+                <h2>💰 Финансовая модель</h2>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 2rem;">Прогноз выручки и прибыли</h3>
+                <div class="bar-chart">
+                    <div class="bar" style="--bar-height: 20%;">
+                        <div class="bar-value">2,5 млн</div>
+                        <div class="bar-label">Сейчас</div>
+                    </div>
+                    <div class="bar" style="--bar-height: 40%;">
+                        <div class="bar-value">13 млн</div>
+                        <div class="bar-label">Год 1</div>
+                    </div>
+                    <div class="bar" style="--bar-height: 70%;">
+                        <div class="bar-value">24 млн</div>
+                        <div class="bar-label">Год 2</div>
+                    </div>
+                    <div class="bar" style="--bar-height: 100%;">
+                        <div class="bar-value">36 млн</div>
+                        <div class="bar-label">Год 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="responsive-table" style="margin-top: 3rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Период</th>
+                            <th>Выручка</th>
+                            <th>Расходы</th>
+                            <th>Чистая прибыль</th>
+                            <th>Рост</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Сейчас</strong></td>
+                            <td>2,5 млн ₽</td>
+                            <td>2,0 млн ₽</td>
+                            <td>500 тыс. ₽</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Год 1</strong></td>
+                            <td>13 млн ₽</td>
+                            <td>11,5 млн ₽</td>
+                            <td>1,5 млн ₽</td>
+                            <td>+420%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Год 2</strong></td>
+                            <td>24 млн ₽</td>
+                            <td>20 млн ₽</td>
+                            <td>4 млн ₽</td>
+                            <td>+85%</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>Год 3</strong></td>
+                            <td>36 млн ₽</td>
+                            <td>29 млн ₽</td>
+                            <td><span class="highlight">7 млн ₽ (583к/мес)</span></td>
+                            <td>+50%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="card">
+                    <div class="card-icon">💵</div>
+                    <h3>Инвестиции год 1</h3>
+                    <p style="font-size: 2rem; color: var(--secondary); font-weight: 700;">2,95 млн ₽</p>
+                    <p style="color: #666; margin-top: 0.5rem;">Маркетинг + персонал + инфраструктура</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>Окупаемость</h3>
+                    <p style="font-size: 2rem; color: var(--success); font-weight: 700;">18-20 мес</p>
+                    <p style="color: #666; margin-top: 0.5rem;">Середина года 2</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Цель достигнута</h3>
+                    <p style="font-size: 2rem; color: var(--gold); font-weight: 700;">32-34 мес</p>
+                    <p style="color: #666; margin-top: 0.5rem;">Q3 года 3</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risks -->
+    <section id="risks">
+        <div class="container">
+            <div class="section-header">
+                <h2>⚠️ Управление рисками</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <span class="risk-badge risk-medium">Средний</span>
+                    <h3>Партнёры не дают заказы</h3>
+                    <p style="color: #666; margin: 1rem 0;">Подписались, но не приводят клиентов</p>
+                    <p><strong>Решение:</strong></p>
+                    <ul style="line-height: 1.8; font-size: 0.9rem;">
+                        <li>→ Еженедельные звонки-напоминания</li>
+                        <li>→ Вебинар "Как продавать мебель"</li>
+                        <li>→ Эксклюзивная коллекция топ-партнёрам</li>
+                        <li>→ Реферальная программа</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="risk-badge risk-high">Высокий</span>
+                    <h3>Проблемы с качеством</h3>
+                    <p style="color: #666; margin: 1rem 0;">Подмастерья не справляются</p>
+                    <p><strong>Решение:</strong></p>
+                    <ul style="line-height: 1.8; font-size: 0.9rem;">
+                        <li>→ Продлить обучение до 3 месяцев</li>
+                        <li>→ Равиль проверяет каждое изделие</li>
+                        <li>→ Штрафы за брак (переделка за свой счёт)</li>
+                        <li>→ Нанимать только с профобразованием</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="risk-badge risk-medium">Средний</span>
+                    <h3>Экономический спад</h3>
+                    <p style="color: #666; margin: 1rem 0;">Снижение спроса на люкс на 20-30%</p>
+                    <p><strong>Решение:</strong></p>
+                    <ul style="line-height: 1.8; font-size: 0.9rem;">
+                        <li>→ Диверсификация каналов</li>
+                        <li>→ Средняя ценовая категория (250к)</li>
+                        <li>→ Акции для партнёров</li>
+                        <li>→ Резервный фонд на 3 месяца</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="risk-badge risk-high">Высокий</span>
+                    <h3>Не делегирует задачи</h3>
+                    <p style="color: #666; margin: 1rem 0;">Равиль пытается всё делать сам</p>
+                    <p><strong>Решение:</strong></p>
+                    <ul style="line-height: 1.8; font-size: 0.9rem;">
+                        <li>→ Управляющий производством к году 2</li>
+                        <li>→ Чёткое разделение ролей</li>
+                        <li>→ Коуч по делегированию</li>
+                        <li>→ KPI для команды = автономия</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Wins -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>⚡ Быстрые победы (30 дней)</h2>
+            </div>
+
+            <div class="checklist">
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 7: Лендинг на конструкторе</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Портфолио 10 работ + форма заказа. Можно отправлять партнёрам.</p>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 10: Фотосессия</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Профессиональная съёмка 10-15 изделий для портфолио и каталога.</p>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 14: База партнёров</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">50 дизайн-студий из топ-10 городов РФ + Алматы.</p>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 21: Первые звонки</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">10 звонков, отправка портфолио, 2-3 встречи назначены.</p>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 7: Вакансия менеджера</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Размещение на hh.ru, к концу месяца можно нанять.</p>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 14: Соцсети</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Instagram/ВК, 5-7 фото с описанием процесса.</p>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-icon">✅</div>
+                    <div>
+                        <strong>День 10: Система учёта клиентов</strong>
+                        <p style="color: #666; margin-top: 0.3rem;">Регистрация, тестовый период 14 дней, внесение первых партнёров.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>🚀 Первое действие</h2>
+            <p style="font-size: 1.2rem; margin: 2rem 0; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Завтра Равиль звонит веб-разработчику (или нанимает фрилансера за 10-15 тыс. ₽) и заказывает лендинг с портфолио 10 лучших работ. Параллельно составляет список 50 дизайн-студий в таблице.
+            </p>
+            <p style="font-size: 1.1rem; opacity: 0.9;">
+                <strong>Эти два действия запустят трансформацию бизнеса.</strong>
+            </p>
+            <a href="#summary" class="cta-button">↑ Вернуться к началу</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Бизнес-план "От мастерской к мануфактуре"</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Путь к 500 000 ₽ чистой прибыли в месяц за 3 года</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 300) {
+                nav.classList.add('visible');
+            } else {
+                nav.classList.remove('visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu after click
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.section-header, .card, .timeline-item, .progress-item, .bar').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString('ru-RU');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger counter animation when stats are visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = entry.target.querySelectorAll('.number');
+                    numbers.forEach(num => {
+                        const text = num.textContent;
+                        if (text.includes('млн')) {
+                            const value = parseInt(text);
+                            num.textContent = '0';
+                            setTimeout(() => {
+                                animateValue(num, 0, value, 2000);
+                                setTimeout(() => {
+                                    num.textContent = text;
+                                }, 2100);
+                            }, 300);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const heroStats = document.querySelector('.hero .stats');
+        if (heroStats) {
+            statsObserver.observe(heroStats);
+        }
+    </script>
+</body>
+</html>
